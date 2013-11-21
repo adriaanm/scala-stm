@@ -5,11 +5,11 @@ organization := "org.scala-stm"
 
 version := "0.8-SNAPSHOT"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.11.0-M7"
 
-crossScalaVersions := Seq("2.10.1-RC2", "2.10.0", "2.9.3", "2.9.2")
+// crossScalaVersions := Seq("2.10.1-RC2", "2.10.0", "2.9.3", "2.9.2")
 
-libraryDependencies += ("org.scalatest" %% "scalatest" % "[1.5,)" % "test")
+libraryDependencies += ("org.scalatest" %% "scalatest" % "2.0.1-SNAP4" % "test").exclude("org.scala-lang.modules", "scala-parser-combinators_2.11.0-M6").exclude("org.scala-lang.modules", "scala-xml_2.11.0-M6")
 
 libraryDependencies += ("junit" % "junit" % "4.5" % "test")
 

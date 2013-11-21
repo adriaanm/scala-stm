@@ -4,7 +4,6 @@ package scala.concurrent.stm.japi
 
 import java.util.concurrent.{ Callable, TimeUnit }
 import java.util.{ List ⇒ JList, Map ⇒ JMap, Set ⇒ JSet }
-import scala.collection.JavaConversions
 import scala.concurrent.stm
 import scala.concurrent.stm._
 
@@ -33,6 +32,7 @@ private[japi] object STMHelpers {
  */
 object STM {
   import STMHelpers._
+  import scala.collection.convert.decorateAsJava._
 
   /**
    * Create a Ref with an initial value. Return a `Ref.View`, which does not
@@ -53,7 +53,7 @@ object STM {
    * Create an empty TMap. Return a `java.util.Map` view of this TMap.
    * @return a new, empty `TMap.View` wrapped as a `java.util.Map`.
    */
-  def newMap[A, B](): JMap[A, B] = JavaConversions.asJavaMap(newTMap[A, B])
+  def newMap[A, B](): JMap[A, B] = newTMap[A, B].asJava
 
   /**
    * Create an empty TSet. Return a `TSet.View`, which does not require
@@ -66,7 +66,7 @@ object STM {
    * Create an empty TSet. Return a `java.util.Set` view of this TSet.
    * @return a new, empty `TSet.View` wrapped as a `java.util.Set`.
    */
-  def newSet[A](): JSet[A] = JavaConversions.asJavaSet(newTSet[A])
+  def newSet[A](): JSet[A] = newTSet[A].asJava
 
   /**
    * Create a TArray containing `length` elements. Return a `TArray.View`,
@@ -82,7 +82,7 @@ object STM {
    * @param length the length of the `TArray.View` to be created
    * @return a new, empty `TArray.View` wrapped as a `java.util.List`.
    */
-  def newArrayAsList[A <: AnyRef](length: Int): JList[A] = JavaConversions.asJavaList(newTArray[A](length))
+  def newArrayAsList[A <: AnyRef](length: Int): JList[A] = newTArray[A](length).asJava
 
   /**
    * Atomic block that takes a `Runnable`.
